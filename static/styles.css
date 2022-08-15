@@ -21,8 +21,7 @@
   align-items: center;
   justify-content: center;
   background-color: #225588;
-  height: 240px;
-
+  padding: 20px 0;
 }
 
 .button_solid017 a {
@@ -98,11 +97,10 @@
   display: flex;
   justify-content: center;
 }
-.sales-container-top__top {
-  display: flex;
-  justify-content: space-around;
 
-}
+/* .menu-container {
+
+} */
 .sales-btn-container {
   display: flex;
   flex-direction: row;
@@ -126,7 +124,6 @@
 table{
   border-collapse: separate;
   border-spacing: 0;
-  padding-right: 20px;
   width: 100%;
 }
 

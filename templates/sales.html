@@ -5,27 +5,29 @@
             <div class="button-container">
                 <p class="button_solid017"><a href="{{ url_for('index') }}">トップ画面</a></p>
                 <p class="button_solid017"><a href="{{ url_for('menu') }}">メニュー登録画面</a></p>
+                <p class="button_solid017"><a href="#">商品別売り上げを開く</a></p>
+                <p class="button_solid017"><a href="#">日別売り上げを開く</a></p>
+                <p class="button_solid017"><a href="#">月別売り上げを開く</a></p>
             </div>
             <div class="sales-container-top">
-                <div class="sales-container-top__top">
-                    <div class="form__container">
-                        <h2>販売実績入力フォーム</h2>
-                        <form method="post" action="{{ url_for('register',key='sales')}}">
-                            <p><input type="date" name="date" placeholder="日付" class="form-input" required></p>
-                            <p><input name="name" placeholder="品名"  list="item_list" class="form-input" required></p>
-                                <datalist id="item_list">
-                                    {% for data in menu_db %}
-                                    <option value="{{data.name}}"></option>
-                                    {% endfor %}
-                                </datalist>
-                            <p><input type="number" min=0 pattern="^[0-9]+$" name="count" placeholder="個数"  class="form-input" required></p>
-                            <p><input type="submit" class="form-input" value="登録"></p>
-                        </form>
-                    </div> <!-- form__container -->
-                </div><!-- /.sales-container-top__top -->
+                <div class="form-container">
+                    <h2 class="form-title">販売実績入力フォーム</h2>
+                    <form method="post" action="{{ url_for('register',key='sales')}}">
+                        <p><input type="date" name="date" placeholder="日付" class="form-input" required></p>
+                        <p><input name="name" placeholder="品名"  list="item_list" class="form-input" required></p>
+                            <datalist id="item_list">
+                                {% for data in menu_db %}
+                                <option value="{{data.name}}"></option>
+                                {% endfor %}
+                            </datalist>
+                        <p><input type="number" min=0 pattern="^[0-9]+$" name="count" placeholder="個数"  class="form-input" required></p>
+                        <p><input type="submit" class="form-input" value="登録"></p>
+                    </form>
+                </div> <!-- form-container -->
             </div><!-- sales-container-top -->
 
-            <div class="sales__menu__container">
+            <div class="menu-container">
+                <h2 class="form-title">商品情報</h2><!-- /.form-title -->
                 <table class="sales__menu__table">
                     <th>商品名<br>-name-</th>
                     <th>値段<br>-price-</th>
