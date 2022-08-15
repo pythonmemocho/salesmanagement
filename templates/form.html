@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="form__container">
+        <h2>販売実績入力フォーム</h2>
+        <form method="post" action="{{ url_for('MenuRegister')}}">
+            <p class="form__container__input"><input type="text" name="name" placeholder="品名" required></p>
+            <p class="form__container__input"><input type="number" name="price" placeholder="値段" required></p>
+            <p><input type="submit" class="btn" value="登録"></p>
+        </form>
+    </div>
+{% endblock %}

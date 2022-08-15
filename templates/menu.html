@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="wrapper">
+    <div class="left-column">
+        <div class="button-container">
+            <p class="button_solid017"><a href="{{ url_for('index') }}">トップ画面</a></p>
+            <p class="button_solid017"><a href="{{ url_for('sales') }}">販売実績登録画面に戻る</a></p>
+        </div>
+        <div class="form-container">
+            <h2>メニュー登録フォーム</h2>
+            <form method="post" action="{{ url_for('register',key='menu')}}">
+                <p><input type="text" class="form-input" name="name" placeholder="品名" required></p>
+                <p><input type="number"  class="form-input" name="price" placeholder="値段" required></p>
+                <p><input type="submit" class="form-input" value="登録"></p>
+            </form>
+        </div><!-- form-container -->
+    </div><!-- /.left-column -->
+    <div class="right-column">
+        <div class="item-container">
+            <h2>登録されている商品名</h2>
+            <table>
+                <th>商品名</th>
+                <th>値段</th>
+                <th>削除</th>
+                {% for data in db %}
+                <tr>
+                    <form method="post" action="{{ url_for('delete',key='menu') }}">
+                        <td>{{ data.name }}</td>
+                        <td>{{ data.price }}</td>
+                        <td class="delete_btn">
+                            <input type="radio" name="id" value="{{ data.id }}" required>
+                            <input class="btn" type="submit" value="削除">
+                        </td>
+                    </form>
+                </tr>
+                {% endfor %}
+            </table>
+        </div><!-- item-container -->
+    </div><!-- /.right-column -->
+</div><!-- /.wrapper -->
+    
+{% endblock %}

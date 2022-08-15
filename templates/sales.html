@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="wrapper">
+        <div class="left-column">
+            <div class="button-container">
+                <p class="button_solid017"><a href="{{ url_for('index') }}">トップ画面</a></p>
+                <p class="button_solid017"><a href="{{ url_for('menu') }}">メニュー登録画面</a></p>
+            </div>
+            <div class="sales-container-top">
+                <div class="sales-container-top__top">
+                    <div class="form__container">
+                        <h2>販売実績入力フォーム</h2>
+                        <form method="post" action="{{ url_for('register',key='sales')}}">
+                            <p><input type="date" name="date" placeholder="日付" class="form-input" required></p>
+                            <p><input name="name" placeholder="品名"  list="item_list" class="form-input" required></p>
+                                <datalist id="item_list">
+                                    {% for data in menu_db %}
+                                    <option value="{{data.name}}"></option>
+                                    {% endfor %}
+                                </datalist>
+                            <p><input type="number" min=0 pattern="^[0-9]+$" name="count" placeholder="個数"  class="form-input" required></p>
+                            <p><input type="submit" class="form-input" value="登録"></p>
+                        </form>
+                    </div> <!-- form__container -->
+                </div><!-- /.sales-container-top__top -->
+            </div><!-- sales-container-top -->
+
+            <div class="sales__menu__container">
+                <table class="sales__menu__table">
+                    <th>商品名<br>-name-</th>
+                    <th>値段<br>-price-</th>
+                    {% for data in menu_db %}
+                    <tr>
+                        <td>{{ data.name }}</td>
+                        <td>{{ data.price }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div><!-- /.left-column -->
+
+        <div class="right-column">
+            <div class="item-container">
+                <h2>商品販売実績</h2>
+                <table>
+                    <tr>
+                        <th>日付<br>-date-</th>
+                        <th>商品名<br>-name-</th>
+                        <th>販売個数<br>-salescount-</th>
+                        <th>削除<br>-delete-</th>
+                    </tr>
+                    {% for data in sales_db %}
+                    <tr>
+                        <form method="post" action="{{ url_for('delete', key='sales') }}">
+                            <td>{{ data.date }}</td>
+                            <td>{{ data.name }}</td>
+                            <td>{{ data.count }}</td>
+                            <td class="delete_btn">
+                                <input type="radio" name="id" value="{{ data.id }}" required>
+                                <input class="btn" type="submit" value="削除">
+                            </td>
+                        </form>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div><!-- /.item-container -->
+<!-- 
+            <div class="right__container">
+                
+                <div>
+                    <table>
+                        <tr>
+                            <th>商品名<br>-name-</th>
+                            <th>商品毎合計額<br>-itemsum-</th>
+                        </tr>
+                        {% for data in join_db %}
+                        <tr>
+                            <td>{{ data.name }}</td>
+                            <td>{{ data.sum }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                <div>
+                    <table>
+                        <tr>
+                            <th>日付<br>-date-</th>
+                            <th>日別合計額<br>-dailyTotal-</th>
+                        </tr>
+                        {% for data in date_join_db %}
+                        <tr>
+                            <td>{{ data.date }}</td>
+                            <td>{{ data.sum }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                <div>
+                    <table>
+                        <tr>
+                            <th>月<br>-month-</th>
+                            <th>月別合計額<br>-monthlyTotal-</th>
+                        </tr>
+                        {% for data in monthlysum_db %}
+                        <tr>
+                            <td>{{ data.date }}</td>
+                            <td>{{ data.sum }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div> -->
+
+        </div><!-- /.right-column -->
+    </div><!-- /.wrapper -->
+
+{% endblock %}
