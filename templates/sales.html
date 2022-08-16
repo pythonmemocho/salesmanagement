@@ -4,10 +4,11 @@
         <div class="left-column">
             <div class="button-container">
                 <p class="button_solid017"><a href="{{ url_for('index') }}">トップ画面</a></p>
-                <p class="button_solid017"><a href="{{ url_for('menu') }}">メニュー登録画面</a></p>
-                <p class="button_solid017"><a href="#">商品別売り上げを開く</a></p>
-                <p class="button_solid017"><a href="#">日別売り上げを開く</a></p>
-                <p class="button_solid017"><a href="#">月別売り上げを開く</a></p>
+                <p class="button_solid017"><a href="{{ url_for('items') }}">商品登録画面</a></p>
+                <p class="button_solid017"><a href="#" id="js-items">商品リストを開く</a></p>
+                <p class="button_solid017"><a href="#" id="js-sales">商品別売り上げを開く</a></p>
+                <p class="button_solid017"><a href="#" id="js-day">日別売り上げを開く</a></p>
+                <p class="button_solid017"><a href="#" id="js-month">月別売り上げを開く</a></p>
             </div>
             <div class="sales-container-top">
                 <div class="form-container">
@@ -25,7 +26,9 @@
                     </form>
                 </div> <!-- form-container -->
             </div><!-- sales-container-top -->
+        </div><!-- /.left-column -->
 
+        <div class="right-column">
             <div class="menu-container">
                 <h2 class="form-title">商品情報</h2><!-- /.form-title -->
                 <table class="sales__menu__table">
@@ -39,9 +42,6 @@
                     {% endfor %}
                 </table>
             </div>
-        </div><!-- /.left-column -->
-
-        <div class="right-column">
             <div class="item-container">
                 <h2>商品販売実績</h2>
                 <table>

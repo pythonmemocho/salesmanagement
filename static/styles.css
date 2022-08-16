@@ -68,6 +68,7 @@
 .right-column {
   width: 70%;
   background-color: green;
+  position: relative;
 }
 /* form-style
 ------------------------------ */
@@ -98,9 +99,14 @@
   justify-content: center;
 }
 
-/* .menu-container {
-
-} */
+.menu-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: red;
+  display: none;
+  width: 40%;
+}
 .sales-btn-container {
   display: flex;
   flex-direction: row;
@@ -154,7 +160,7 @@ table td{
   background-color: rgb(232, 255, 247);
   border-left: 1px solid #a8b7c5;
   border-bottom: 1px solid #a8b7c5;
-  border-top:none;
+  border-top: none;
   box-shadow: 0px -3px 5px 1px #eee inset;
 }
 

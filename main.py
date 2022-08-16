@@ -5,100 +5,36 @@ from flask import request
 from flask import url_for
 import sqlite3
 
+from _sql import *
+
 #データベース名を設定
 DATABASE = 'database.db'
 
-#データベース作成用の関数
-def create_table(table):
-    con = sqlite3.connect(DATABASE)
-    cur = con.cursor()
-    if table == 'menu':
-        cur.execute('''
-            create table if not exists menutable(
-                id integer primary key autoincrement,
-                name text, 
-                price integer
-                )''')
-    elif table == 'sales':
-        cur.execute('''
-            create table if not exists salestable(
-                id integer primary key autoincrement,
-                date text,
-                name text, 
-                salesCount integer
-                )''')
-    cur.close()
-    con.close()
-
 #データベースを作成
-create_table('menu')
-create_table('sales')
+create_table(DATABASE,'items')
+create_table(DATABASE,'sales')
 
 #Flaskの初期化
 app = Flask(__name__)
-
-def data_fetch(database,table):
-    con = sqlite3.connect(database)
-    cur = con.cursor()
-    if table == 'menutable':
-        db = cur.execute('select * from menutable').fetchall()
-    elif table == 'salestable':
-        db = cur.execute('select * from salestable order by date').fetchall()
-    cur.close()
-    con.close()
-    return db
-
-def sumEachItem(database):
-    con = sqlite3.connect(database)
-    cur = con.cursor()
-    db = cur.execute('''select menutable.name, sum(price*salesCount) as sum 
-                    from menutable inner join salestable 
-                    on menutable.name = salestable.name 
-                    group by menutable.name;''').fetchall()
-    cur.close()
-    con.close()
-    return db
-
-def sumDaily(database):
-    con = sqlite3.connect(database)
-    cur = con.cursor()
-    db = cur.execute('''select date,sum(price*salesCount) as sum 
-                    from menutable inner join salestable 
-                    on menutable.name=salestable.name 
-                    group by date''').fetchall()
-    cur.close()
-    con.close()
-    return db
-
-def sumMonthly(database):
-    con = sqlite3.connect(database)
-    cur = con.cursor()
-    db = cur.execute('''select substr(date, 6 ,2) as month,sum(price*salesCount) as sum 
-                    from menutable inner join salestable 
-                    on menutable.name=salestable.name 
-                    group by month''').fetchall()
-    cur.close()
-    con.close()
-    return db
 
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route("/menu", methods=["GET","POST"])
-def menu():
-    database = data_fetch(DATABASE,'menutable')
+@app.route("/itemsList", methods=["GET","POST"])
+def items():
+    database = data_fetch(DATABASE,'itemstable')
     db = ({'id':data[0],'name':data[1],'price':data[2]} for data in database)
-    return render_template("menu.html", db=db)
+    return render_template("itemsList.html", db=db)
 
 @app.route("/sales", methods=["GET","POST"])
 def sales():
-    menu = data_fetch(DATABASE,'menutable')
+    menu = data_fetch(DATABASE,'itemstable')
     sales = data_fetch(DATABASE,'salestable')
-    join = sumEachItem(DATABASE)
-    date_join = sumDaily(DATABASE)
-    month_join = sumMonthly(DATABASE)
+    join = sum_each_item(DATABASE)
+    date_join = sum_daily(DATABASE)
+    month_join = sum_monthly(DATABASE)
     
     menudb = [{'id':data[0],'name':data[1],'price':data[2]} for data in menu]
     salesdb = [{'id':data[0],'date':data[1],'name':data[2],'count':data[3]} for data in sales]
@@ -121,12 +57,12 @@ def register(key):
         con = sqlite3.connect(DATABASE)
         cur = con.cursor()
         cur.execute('insert into salestable(date, name, salesCount) values (?,?,?)',[date,name,count])
-    elif key == 'menu':
+    elif key == 'items':
         name = request.form['name']
         price = request.form['price']
         con = sqlite3.connect(DATABASE)
         cur = con.cursor()
-        cur.execute('insert into menutable(name, price) values (?,?)',[name,price])
+        cur.execute('insert into itemstable(name, price) values (?,?)',[name,price])
     con.commit()
     cur.close()
     con.close()
@@ -139,10 +75,10 @@ def delete(key):
         con = sqlite3.connect(DATABASE)
         cur = con.cursor()
         cur.execute('delete from salestable where id=?',[delete_id])
-    elif key == 'menu':
+    elif key == 'items':
         con = sqlite3.connect(DATABASE)
         cur = con.cursor()
-        cur.execute('delete from menutable where id=?',[delete_id])
+        cur.execute('delete from itemstable where id=?',[delete_id])
     con.commit()
     cur.close()
     con.close()

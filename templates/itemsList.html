@@ -7,8 +7,8 @@
             <p class="button_solid017"><a href="{{ url_for('sales') }}">販売実績登録画面に戻る</a></p>
         </div>
         <div class="form-container">
-            <h2 class="form-title">メニュー登録フォーム</h2>
-            <form method="post" action="{{ url_for('register',key='menu')}}">
+            <h2 class="form-title">品名登録フォーム</h2>
+            <form method="post" action="{{ url_for('register',key='items')}}">
                 <p><input type="text" class="form-input" name="name" placeholder="品名" required></p>
                 <p><input type="number"  class="form-input" name="price" placeholder="値段" required></p>
                 <p><input type="submit" class="form-input" value="登録"></p>
@@ -24,7 +24,7 @@
                 <th>削除</th>
                 {% for data in db %}
                 <tr>
-                    <form method="post" action="{{ url_for('delete',key='menu') }}">
+                    <form method="post" action="{{ url_for('delete',key='items') }}">
                         <td>{{ data.name }}</td>
                         <td>{{ data.price }}</td>
                         <td class="delete_btn">
