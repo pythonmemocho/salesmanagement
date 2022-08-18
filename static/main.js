@@ -4,7 +4,12 @@ $('#show').on('click',function(){
 
 $('#js-items').on('click',function(e){
     e.preventDefault();
-    console.log('test');
     $('.menu-container').slideToggle();
     $('.item-container').slideToggle();
 });
+$('#js-sales').on('click',function(e){
+    e.preventDefault();
+    $('.sales-container').slideToggle();
+    $('.item-container').slideToggle();
+});
+

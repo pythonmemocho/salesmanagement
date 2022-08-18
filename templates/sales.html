@@ -37,7 +37,7 @@
                     {% for data in menu_db %}
                     <tr>
                         <td>{{ data.name }}</td>
-                        <td>{{ data.price }}</td>
+                        <td>{{ "{:,d}".format(data.price) }}</td>
                     </tr>
                     {% endfor %}
                 </table>
@@ -66,14 +66,13 @@
                     {% endfor %}
                 </table>
             </div><!-- /.item-container -->
-<!-- 
-            <div class="right__container">
-                
+
+            <div class="sales-container">
                 <div>
                     <table>
                         <tr>
                             <th>商品名<br>-name-</th>
-                            <th>商品毎合計額<br>-itemsum-</th>
+                            <th>商品別合計額<br>-itemsum-</th>
                         </tr>
                         {% for data in join_db %}
                         <tr>
@@ -83,6 +82,7 @@
                         {% endfor %}
                     </table>
                 </div>
+
                 <div>
                     <table>
                         <tr>
@@ -97,6 +97,10 @@
                         {% endfor %}
                     </table>
                 </div>
+            </div>
+<!-- 
+            <div class="right__container">
+
                 <div>
                     <table>
                         <tr>
