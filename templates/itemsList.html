@@ -26,7 +26,7 @@
                 <tr>
                     <form method="post" action="{{ url_for('delete',key='items') }}">
                         <td>{{ data.name }}</td>
-                        <td>{{ data.price }}</td>
+                        <td>{{ "{:,d}".format(data.price) }}</td>
                         <td class="delete_btn">
                             <input type="radio" name="id" value="{{ data.id }}" required>
                             <input class="btn" type="submit" value="削除">

@@ -6,9 +6,9 @@
                 <p class="button_solid017"><a href="{{ url_for('index') }}">トップ画面</a></p>
                 <p class="button_solid017"><a href="{{ url_for('items') }}">商品登録画面</a></p>
                 <p class="button_solid017"><a href="#" id="js-items">商品リストを開く</a></p>
-                <p class="button_solid017"><a href="#" id="js-sales">商品別売り上げを開く</a></p>
-                <p class="button_solid017"><a href="#" id="js-day">日別売り上げを開く</a></p>
-                <p class="button_solid017"><a href="#" id="js-month">月別売り上げを開く</a></p>
+                <p class="button_solid017"><a href="#" id="js-sales">商品別売上を開く</a></p>
+                <p class="button_solid017"><a href="#" id="js-day">日別売上を開く</a></p>
+                <p class="button_solid017"><a href="#" id="js-month">月別売上を開く</a></p>
             </div>
             <div class="sales-container-top">
                 <div class="form-container">
@@ -69,6 +69,7 @@
 
             <div class="sales-container">
                 <div>
+                    <h2 class="form-title">商品別売上</h2><!-- /.form-title -->
                     <table>
                         <tr>
                             <th>商品名<br>-name-</th>
@@ -77,13 +78,15 @@
                         {% for data in join_db %}
                         <tr>
                             <td>{{ data.name }}</td>
-                            <td>{{ data.sum }}</td>
+                            <td>{{ "{:,d}".format(data.sum) }}</td>
                         </tr>
                         {% endfor %}
                     </table>
                 </div>
-
+            </div>
+            <div class="daily-container">
                 <div>
+                    <h2 class="form-title">日別売上</h2><!-- /.form-title -->
                     <table>
                         <tr>
                             <th>日付<br>-date-</th>
@@ -92,16 +95,16 @@
                         {% for data in date_join_db %}
                         <tr>
                             <td>{{ data.date }}</td>
-                            <td>{{ data.sum }}</td>
+                            <td>{{ "{:,d}".format(data.sum) }}</td>
                         </tr>
                         {% endfor %}
                     </table>
                 </div>
-            </div>
-<!-- 
-            <div class="right__container">
+            </div><!-- /.daily-container -->
 
+            <div class="monthly-container">
                 <div>
+                    <h2 class="form-title">月別売上</h2><!-- /.form-title -->
                     <table>
                         <tr>
                             <th>月<br>-month-</th>
@@ -110,14 +113,13 @@
                         {% for data in monthlysum_db %}
                         <tr>
                             <td>{{ data.date }}</td>
-                            <td>{{ data.sum }}</td>
+                            <td>{{ "{:,d}".format(data.sum) }}</td>
                         </tr>
                         {% endfor %}
                     </table>
                 </div>
-            </div> -->
+            </div>
 
-        </div><!-- /.right-column -->
     </div><!-- /.wrapper -->
 
 {% endblock %}

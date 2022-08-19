@@ -20,10 +20,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #225588;
   padding: 20px 0;
 }
-
+.button_solid017:nth-child(2) {
+  margin-bottom: 40px;
+}
 .button_solid017 a {
   position: relative;
   display: flex;
@@ -62,12 +63,10 @@
 
 .left-column {
   width: 30%;
-  background-color: red;
 }
 
 .right-column {
   width: 70%;
-  background-color: green;
   position: relative;
 }
 /* form-style
@@ -84,12 +83,19 @@
   font-size: 1.6rem;
 }
 
-/* menu.index 
--------------------------------*/
 .item-container {
   margin: 0 auto;
   width: 90%;
   text-align: center;
+  padding-top: 20px;
+}
+.form-title {
+  text-align: center;
+}
+/* menu.index 
+-------------------------------*/
+.main-title {
+  font-size: 2.4rem;
 }
 
 /* sales.index 
@@ -99,11 +105,13 @@
   justify-content: center;
 }
 
-.menu-container {
+.menu-container,
+.sales-container,
+.daily-container,
+.monthly-container {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: red;
   display: none;
   width: 40%;
 }

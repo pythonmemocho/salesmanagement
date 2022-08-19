@@ -12,4 +12,14 @@ $('#js-sales').on('click',function(e){
     $('.sales-container').slideToggle();
     $('.item-container').slideToggle();
 });
+$('#js-day').on('click',function(e){
+    e.preventDefault();
+    $('.daily-container').slideToggle();
+    $('.item-container').slideToggle();
+});
+$('#js-month').on('click',function(e){
+    e.preventDefault();
+    $('.monthly-container').slideToggle();
+    $('.item-container').slideToggle();
+});
 
